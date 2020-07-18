@@ -1,17 +1,17 @@
 $(document).ready(function() {
 
-  // initialize variables
-  // human = either x or o, whatever the player picks
-  // ai = either x or o, whatever the player doesn't pick
+  // inisiasi variables
+  // manusia = terserh pilih apa
+  // ai = x or o, yang bukan dipilih player
   var human, ai;
 
-  // each of these corresponds to a cell in the game table
+  // cell pada game table
   var c00, c01, c02, c10, c11, c12, c20, c21, c22;
 
   // to keep track of whose turn it is
   var turn = 0;
 
-  // player picks x or o
+  // player pilih x or o
   $("#x").click(function() {
     human = "X";
     ai = "O";
@@ -25,8 +25,8 @@ $(document).ready(function() {
     $("#board").fadeTo("slow",1);
   });
 
-  //all squares should be empty
-  //clears the board
+  //semua bidak harus kosong
+  //bersihkan bidak / kotak
   function clearBoard() {
     c00 = $("#c00").text("");
     c01 = $("#c01").text("");
@@ -40,14 +40,14 @@ $(document).ready(function() {
     turn = 0;
   }
 
-  //when "New game" button is pressed, clear the board
+  //jika Main lagi dipencet, maka clear kotak
   $("#new-game").click(function() {
     clearBoard();
     $("#final-screen").hide();
     $("#choice").fadeTo("slow",1);
   });
 
-  // The player clicks a square. If the square is empty, an x is placed in that square. If the square is not empty, have the human pick a different square.
+  // Player menklik kotak. If kotak kosong, X diletakan pada kotak tersebut. Jika kotak tidak kosong, human harus pilih kotak lain.
   $("td").click(function() {
     if (turn === 0) {
       if ($(this).text() === "") {
@@ -59,20 +59,20 @@ $(document).ready(function() {
         checkSquareValues();
         checkBoardState();
       } else {
-        alert("There is already a move on that square. Please pick a different square.");
+        alert("Kotak Penuh! Pilih kotak lain Oni-chan~");
       }
     }
-  }); //end box click function
+  }); //fuction klik box terakhir
 
-  // The ai puts its token in an empty square based on some of the prioritized rules from https://en.wikipedia.org/wiki/Tic-tac-toe#Strategy:
-  // 1. If there is a chance to win, go there.
-  // 2. If there is a chance to block, go there.
-  // 3. Empty center.
-  // 4. If the opponent is in the corner, the play in the opposite corner.
-  // 5. Empty corner.
-  // 6. Empty side.
+  // The ai mengambil tokenya berdasar rules tictactoe pada umum nya
+  // 1. Jika ada kesempatan menang, pilih kotak itu.
+  // 2. Jika ada kesempatan mem block jalan lawan, pilih kotak itu.
+  // 3. Pusat kosong.
+  // 4. jika oponen berada di sudut, the play berada di lawan sudut.
+  // 5. sudut kosong.
+  // 6. Empty kosong.
   function aiMove() {
-    // case 1: if there is a chance to win
+    // case 1: jika ada kesempatan menang
     if (c00 === "" && ((c01 === ai && c02 === ai) || (c10 === ai && c20 === ai) || (c11 === ai && c22 === ai))) {
       $("#c00").text(ai);
       turn = 0;
@@ -109,7 +109,7 @@ $(document).ready(function() {
       $("#c22").text(ai);
       turn = 0;
     }
-    // case 2: if there is a chance to block
+    // case 2: jika ada cara memblock lawan
     else if (c00 === "" && ((c01 === human && c02 === human) || (c10 === human && c20 === human) || (c11 === human && c22 === human))) {
       $("#c00").text(ai);
       turn = 0;
@@ -151,7 +151,7 @@ $(document).ready(function() {
       $("#c11").text(ai);
       turn = 0;
     }
-    // case 4: opposite corner
+    // case 4: sisi berlawanan
     else if (c00 === "" && (c02 === human  || c20 === human)) {
       $("#c00").text(ai);
       turn = 0;
@@ -168,7 +168,7 @@ $(document).ready(function() {
       $("#c20").text(ai);
       turn = 0;
     }
-    // case 5: corner
+    // case 5: tengah
     else if (c00 === "") {
       $("#c00").text(ai);
       turn = 0;
@@ -185,7 +185,7 @@ $(document).ready(function() {
       $("#c22").text(ai);
       turn = 0;
     }
-    // case 6: empty side
+    // case 6: sisi kosong
     else if (c01 === "") {
       $("#c01").text(ai);
       turn = 0;
@@ -204,7 +204,7 @@ $(document).ready(function() {
     }
   }
 
-  // The program checks what is in each box after each move.
+  // Program akan mengecek disetiap box setelah beberapa move
   function checkSquareValues() {
     c00 = $("#c00").html();
     c01 = $("#c01").html();
@@ -217,15 +217,15 @@ $(document).ready(function() {
     c22 = $("#c22").html();
   }
 
-  // The program should check the state: keep playing, someone won, or a draw.
+  // program harus mengecek keadaane: tetep bermain, orang yang menang atau draw
   function checkBoardState() {
     // human wins
-    if ((c00 === c01 && c00 === c02 && (c00 === human)) || //first row
-      (c10 === c11 && c10 === c12 && (c10 === human)) || //second row
-      (c20 === c21 && c20 === c22 && (c20 === human)) || //third row
-      (c00 === c10 && c00 === c20 && (c00 === human)) || //first column
-      (c01 === c11 && c01 === c21 && (c01 === human)) || //second column
-      (c02 === c12 && c02 === c22 && (c02 === human)) || //third column
+    if ((c00 === c01 && c00 === c02 && (c00 === human)) || // baris 1
+      (c10 === c11 && c10 === c12 && (c10 === human)) || //baris 2
+      (c20 === c21 && c20 === c22 && (c20 === human)) || //baris 3
+      (c00 === c10 && c00 === c20 && (c00 === human)) || //kolom 1
+      (c01 === c11 && c01 === c21 && (c01 === human)) || //kolom 2
+      (c02 === c12 && c02 === c22 && (c02 === human)) || //kolom 3
       (c00 === c11 && c00 === c22 && (c00 === human)) || //diagonal 1
       (c02 === c11 && c02 === c20 && (c02 === human)) //diagonal 2
     ) {
@@ -234,12 +234,12 @@ $(document).ready(function() {
       $("#final-screen").fadeTo("slow",1);
     }
     // ai wins
-    else if ((c00 === c01 && c00 === c02 && (c00 === ai)) || //first row
-      (c10 === c11 && c10 === c12 && (c10 === ai)) || //second row
-      (c20 === c21 && c20 === c22 && (c20 === ai)) || //third row
-      (c00 === c10 && c00 === c20 && (c00 === ai)) || //first column
-      (c01 === c11 && c01 === c21 && (c01 === ai)) || //second column
-      (c02 === c12 && c02 === c22 && (c02 === ai)) || //third column
+    else if ((c00 === c01 && c00 === c02 && (c00 === ai)) || //baris 1
+      (c10 === c11 && c10 === c12 && (c10 === ai)) || //baris 2
+      (c20 === c21 && c20 === c22 && (c20 === ai)) || //baris 3
+      (c00 === c10 && c00 === c20 && (c00 === ai)) || //kolom 1
+      (c01 === c11 && c01 === c21 && (c01 === ai)) || //kolom 2
+      (c02 === c12 && c02 === c22 && (c02 === ai)) || //kolom 3
       (c00 === c11 && c00 === c22 && (c00 === ai)) || //diagonal 1
       (c02 === c11 && c02 === c20 && (c02 === ai)) //diagonal 2
     ) {
@@ -250,7 +250,7 @@ $(document).ready(function() {
     // tie
     else if (c00 && c01 && c02 && c10 && c11 && c12 && c20 && c21 && c22) {
       $("#board").fadeOut("slow");
-      $("#winner").text("It's a tie!");
+      $("#winner").text("Draw!");
       $("#final-screen").fadeTo("slow",1);
     }
   }
