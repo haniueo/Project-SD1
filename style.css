@@ -1,189 +1,86 @@
-body{
-
-    margin-top: 40px;
-
-    background: #F08080;
-
-    color: #ffffff;
-
-    font-family: Helvetica;
-
-    font-weight: bold;
-
-    text-align: center;
-
-    
-
+body {
+  background-color: #90BEDE;
+  font-family: Muli, sans-serif;
+  font-weight: bold;
+  color: #779CB7;
+  margin-top: 30px;
 }
 
- 
-
-h1{
-
-    text-transform: uppercase;
-
-    font-size: 2em;
-
-    letter-spacing: 0.1em;
-
-    color: azure;
-
-    
-
+h1 {
+  text-align: center;
+  font-size: 60px;
+  color: #477998;
 }
 
-.container {
-
-    margin: o auto;
-
-    width: 400px;
-
-    
-
+.hidden {
+  display: none;
 }
 
- 
+/* first screen */
 
-#game{
-
-    width: 300px;
-
-    height: 300px;
-
-    border: 1px solid #2c3e52;
-
-    margin: 0 auto;
-
-    padding: 0;
-
-    margin-bottom: 20px;
-
-    
-
+#choice {
+  font-size: 60px;
+  color: #F3E8EE;
 }
 
- 
-
-#game > li {
-
-    list-style: none;
-
-    float: left;
-
-    overflow: hidden;
-
-    width: 100px;
-
-    height: 100px;
-
-    background: #17202a ;
-
-    border: 1px solid #2c3e52 ;
-
-    border-right: 1px solid #2c3e52 ;
-
-    cursor: pointer;
-
-    text-transform: uppercase;
-
-    text-align: center;
-
-    padding-top: 20px;
-
-    -moz-box-sizing: border-box;
-
-    box-sizing: border-box;
-
+a {
+  text-decoration: none;
 }
 
- 
-
-#game > li.🐱 {
-
-    font-size: 40px;
-
-    color: #ed4e6e;
-
+#x, #o {
+  color: #FF5E5B;
+  font-weight: bold;
 }
 
- 
+/* board */
 
-#game > li.🐶 {
-
-    font-size: 40px;
-
-    color: aqua;
-
+#container {
+  text-align: center;
+  margin: 0 auto;
+  width: 420px;
+  height: 420px;
+  position: relative;
 }
 
- 
-
-#game > li:hover {
-
-    background: #212f3d;
-
+#board {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-collapse: collapse;
+  border: 11px solid #90BEDE;
 }
 
- 
-
-#game >li.active {
-
-    width: 100px;
-
-    height: 100px;
-
-    border: 0;
-
+td {
+  border: 10px solid #779CB7;
+  width: 120px;
+  height: 120px;
+  cursor: pointer;
+  font-size: 70px;
+  color: #F3E8EE;
+  font-weight: bold;
+  text-align: center;
 }
 
- 
+/* final screen */
 
-#nfo {
-
-    text-align: center;
-
-    margin-top: 5px;
-
-    
-
+#winner {
+  font-size: 55px;
+  color: #F3E8EE;
+  margin-top: -15px;
 }
 
- 
-
- 
-
-#reset-game {
-
-    text-align: center;
-
-    border: none;
-
-    padding: 0.06em 1.2em;
-
-    background: #ed4e6e;
-
-    color: #ffffff;
-
-    font-size: 1em;
-
-    letter-spacing: 1px;
-
-    text-transform: uppercase;
-
-    cursor: pointer;
-
-    display: inline-block;
-
-    margin: 3px 2px;
-
-    border-radius: 10px;
-
+#new-game {
+  font-size: 55px;
+  color: #FF5E5B;
 }
 
- 
+/* footer */
+footer {
+  text-align: center;
+  color: #477998;
+  margin-top: 40px;
+}
 
-#reset-game:hover {
-
-    background: #2c3e52;
-
+footer a {
+  color: #F3E8EE;
 }
