@@ -6,115 +6,29 @@
 <meta name="apple-mobile-web-app-title" content="CodePen">
 <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
 <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
-<title>CodePen - Player vs Computer Tic-Tac-Toe</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href='https://fonts.googleapis.com/css?family=Lobster|Comfortaa:700,400' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
-<style>
-html {
-  box-sizing: border-box;
-}
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-body {
-  background-color: #996E89;
-  font-family: "Comfortaa", sans-serif;
-}
-h1 {
-  font-family: "Lobster", serif;
-}
-.message {
-  color: #fff;
-  font-size: 1.5em;
-  padding-bottom: 1em;
-}
-form label {
-  font-size: 4em;
-  font-weight: bold;
-  vertical-align: middle;
-}
-form input[type=radio] {
-  margin: 1em;
-  cursor: pointer;
-}
-form fieldset {
-  display: block;
-  opacity: 1;
-  transition: all ease 1s;
-}
-form.game-on fieldset {
-  opacity: 0;
-  display: none;
-}
-form.game-on button {
-  opacity: 1;
-  display: block;
-  margin: 0 auto;
-}
-#grid-section {
-  margin: 3em 0;
-}
-#grid {
-  width: 300px;
-  margin: 0 auto;
-}
-li {
-  border: 1px solid #000;
-  width: 100px;
-  height: 100px;
-  display: block;
-  float: left;
-  font-size: 3em;
-  text-align: center;
-  padding: 0.5em;
-}
-#c1,
-#c2,
-#c3 {
-  border-top: none;
-}
-#c3,
-#c6,
-#c9 {
-  border-right: none;
-}
-#c7,
-#c8,
-#c9 {
-  border-bottom: none;
-}
-#c1,
-#c4,
-#c7 {
-  border-left: none;
-}
-.winner {
-  color: #9AE1E5;
-}
-.btn-primary,
-.btn-primary:focus {
-  background-color: #33B7A5;
-  opacity: 0;
-  outline: 0;
-  transition: all ease 0.3s;
-}
-.btn-primary:hover {
-  background-color: #4C2F39;
-}
-</style>
-<script>
-  window.console = window.console || function(t) {};
-</script>
-<script>
-  if (document.location.search.match(/type=embed/gi)) {
-    window.parent.postMessage("resize", "*");
-  }
-</script>
-</head>
+<title> Tic Tac Toe 🐱 x 🐶 Multiplayer </title> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <style media="screen">
+            body { background: #F08080; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-weight: bold; text-align: center;}
+            #container { margin: 0 auto;width: 400px;}
+            #container h2 { font-size: 1em;text-transform: uppercase; letter-spacing: 0.1em; color: azure;}
+            h3 { font-size: 1em;}
+            #game { width: 240px; height: 240px;border: 1px solid #2c3e52; margin: auto; padding: 0; margin-bottom: 20px;}
+            #game li { list-style: none; float: left;overflow: hidden;width: 80px;height: 80px;background: #17202a ;border: 1px solid #2c3e52 ;border-right: 1px solid #2c3e52 ;cursor: pointer;text-transform: uppercase;text-align: center;padding-top: 20px;-moz-box-sizing: border-box;box-sizing: border-box;}
+            #game li.🐱 { font-size: 35px;}
+            #game li.🐶 { font-size: 35px;}
+            #game li:hover { background: #212f3d;}
+            #game li:active { width: 80px; height: 80px; border: 0;}
+            #nfo {text-align: center; margin-top: 10px;}
+            #reset-game {text-align: center; font-weight: bold; border: none;padding: 0.06em 1.2em;background: #ed4e6e;color: #ffffff;font-size: 1em;letter-spacing: 1px;text-transform: uppercase;cursor: pointer;display: inline-block;margin: 3px 2px;border-radius: 10px;}
+            #reset-game reset-game:hover {background: #2c3e52; }
+    
+            button { background-color: #ed4e6e; border: none; color:azure; padding: 0.08em 1.2em; text-align: center; display: inline-block; font-size: 15px; cursor: pointer; border-radius: 10px; font-weight: bold;}
+            button:hover { background-color: #2c3e52;}       
+        </style>
+    </head>
 <body translate="no">
 <div class="container">
 <div class="row text-center" id="intro-section">
