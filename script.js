@@ -231,7 +231,7 @@ $(document).ready(function() {
     ) {
       $("#board").fadeOut("slow");
       $("#winner").text("You win!");
-      $("#final-screen").fadeTo("slow",1);
+      $("#final-screen").fadeTo("slow",3);
     }
     // ai wins
     else if ((c00 === c01 && c00 === c02 && (c00 === ai)) || //baris 1
@@ -245,13 +245,13 @@ $(document).ready(function() {
     ) {
       $("#board").fadeOut("slow");
       $("#winner").text("Computer wins!");
-      $("#final-screen").fadeTo("slow",1);
+      $("#final-screen").fadeTo("slow",3);
     }
     // tie
     else if (c00 && c01 && c02 && c10 && c11 && c12 && c20 && c21 && c22) {
       $("#board").fadeOut("slow");
       $("#winner").text("Draw!");
-      $("#final-screen").fadeTo("slow",1);
+      $("#final-screen").fadeTo("slow",3);
     }
   }
 
