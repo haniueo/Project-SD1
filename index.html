@@ -1,52 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<link rel="apple-touch-icon" type="image/png" href="https://static.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
-<meta name="apple-mobile-web-app-title" content="CodePen">
-<link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
-<link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="style.css">
-<title> Tic Tac Toe 🐱 x 🐶 Multiplayer </title> 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-        <style media="screen">
-            body { background: #F08080; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            font-weight: bold; text-align: center;}
-            #container { margin: 0 auto;width: 400px;}
-            #container h2 { font-size: 1em;text-transform: uppercase; letter-spacing: 0.1em; color: azure;}
-            h3 { font-size: 1em;}
-            #game { width: 240px; height: 240px;border: 1px solid #2c3e52; margin: auto; padding: 0; margin-bottom: 20px;}
-            #game li { list-style: none; float: left;overflow: hidden;width: 80px;height: 80px;background: #17202a ;border: 1px solid #2c3e52 ;border-right: 1px solid #2c3e52 ;cursor: pointer;text-transform: uppercase;text-align: center;padding-top: 20px;-moz-box-sizing: border-box;box-sizing: border-box;}
-            #game li.🐱 { font-size: 35px;}
-            #game li.🐶 { font-size: 35px;}
-            #game li:hover { background: #212f3d;}
-            #game li:active { width: 80px; height: 80px; border: 0;}
-            #nfo {text-align: center; margin-top: 10px;}
-            #reset-game {text-align: center; font-weight: bold; border: none;padding: 0.06em 1.2em;background: #ed4e6e;color: #ffffff;font-size: 1em;letter-spacing: 1px;text-transform: uppercase;cursor: pointer;display: inline-block;margin: 3px 2px;border-radius: 10px;}
-            #reset-game reset-game:hover {background: #2c3e52; }
-    
-            button { background-color: #ed4e6e; border: none; color:azure; padding: 0.08em 1.2em; text-align: center; display: inline-block; font-size: 15px; cursor: pointer; border-radius: 10px; font-weight: bold;}
-            button:hover { background-color: #2c3e52;}       
-        </style>
-    </head>
-<body translate="no">
-<div class="container">
-<div class="row text-center" id="intro-section">
-<h1>Player vs Computer Tic-Tac-Toe</h1>
-<h2 class="message">Choose your player:</h2>
-<form action="#">
-<fieldset>
-<input type="radio" name="player-choice" id="player-choice-1" value="X" />
-<label for="player-choice-1">X</label>
-<input type="radio" name="player-choice" id="player-choice-2" value="O" />
-<label for="player-choice-2">O</label>
-</fieldset>
-<button id="reset" class="btn btn-primary">Reset</button>
-</form>
-</div>
-<div class="row" id="grid-section">
-<ul id="grid"></ul>
-</div>
-  </body>
-  </html>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+</head>
+
+<body>
+  <h1>Tic Tac Toe</h1>
+  <div id="container">
+    <table id="board" class="hidden">
+      <tr class="row">
+        <td id="c00"></td>
+        <td id="c01"></td>
+        <td id="c02"></td>
+      </tr>
+      <tr class="row">
+        <td id="c10"></td>
+        <td id="c11"></td>
+        <td id="c12"></td>
+      </tr>
+      <tr class="row">
+        <td id="c20"></td>
+        <td id="c21"></td>
+        <td id="c22"></td>
+      </tr>
+    </table>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div id="final-screen" class="hidden">
+      <div id="winner"></div>
+      <br>
+      <a href="#" id="new-game">Play Again</a>
+    </div>
+    <div id="choice">
+      <a href="#" id="x">X</a> or <a href="#" id="o">O</a> ?
+    </div>
+  </div>
+
+  <!-- scripts -->
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+</body>
+
+<footer>
+  <p class="center">Created with <i class="fa fa-heart" style="color: #FF5252"></i> by <a href="https://github.com/bethqiang">Beth Qiang</a></p>
+</footer>
