@@ -1,25 +1,264 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" type="image/png" href="https://static.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+<link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+<link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+<title>CodePen - Player vs Computer Tic-Tac-Toe</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href='https://fonts.googleapis.com/css?family=Lobster|Comfortaa:700,400' rel='stylesheet' type='text/css'>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+<style>
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+body {
+  background-color: #996E89;
+  font-family: "Comfortaa", sans-serif;
+}
+h1 {
+  font-family: "Lobster", serif;
+}
+.message {
+  color: #fff;
+  font-size: 1.5em;
+  padding-bottom: 1em;
+}
+form label {
+  font-size: 4em;
+  font-weight: bold;
+  vertical-align: middle;
+}
+form input[type=radio] {
+  margin: 1em;
+  cursor: pointer;
+}
+form fieldset {
+  display: block;
+  opacity: 1;
+  transition: all ease 1s;
+}
+form.game-on fieldset {
+  opacity: 0;
+  display: none;
+}
+form.game-on button {
+  opacity: 1;
+  display: block;
+  margin: 0 auto;
+}
+#grid-section {
+  margin: 3em 0;
+}
+#grid {
+  width: 300px;
+  margin: 0 auto;
+}
+li {
+  border: 1px solid #000;
+  width: 100px;
+  height: 100px;
+  display: block;
+  float: left;
+  font-size: 3em;
+  text-align: center;
+  padding: 0.5em;
+}
+#c1,
+#c2,
+#c3 {
+  border-top: none;
+}
+#c3,
+#c6,
+#c9 {
+  border-right: none;
+}
+#c7,
+#c8,
+#c9 {
+  border-bottom: none;
+}
+#c1,
+#c4,
+#c7 {
+  border-left: none;
+}
+.winner {
+  color: #9AE1E5;
+}
+.btn-primary,
+.btn-primary:focus {
+  background-color: #33B7A5;
+  opacity: 0;
+  outline: 0;
+  transition: all ease 0.3s;
+}
+.btn-primary:hover {
+  background-color: #4C2F39;
+}
+</style>
+<script>
+  window.console = window.console || function(t) {};
+</script>
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+</head>
+<body translate="no">
 <div class="container">
-  <div class="row text-center" id="intro-section">
-    <h1>Player vs Computer Tic-Tac-Toe</h1>
-    <h2 class="message">Choose your player:</h2>
-    <form action="#">
-      <fieldset>
-        <input type="radio" name="player-choice" id="player-choice-1" value="X" />
-        <label for="player-choice-1">X</label>
-        <input type="radio" name="player-choice" id="player-choice-2" value="O" />
-        <label for="player-choice-2">O</label>
-      </fieldset>
-      <button id="reset" class="btn btn-primary">Reset</button>
-    </form>
-  </div>
-  <div class="row" id="grid-section">
-    <ul id="grid"></ul>
-  </div>
-  <script src="set.js" type="text/javascript" charset="utf-8"></script>
-  
-  </html>
+<div class="row text-center" id="intro-section">
+<h1>Player vs Computer Tic-Tac-Toe</h1>
+<h2 class="message">Choose your player:</h2>
+<form action="#">
+<fieldset>
+<input type="radio" name="player-choice" id="player-choice-1" value="X" />
+<label for="player-choice-1">X</label>
+<input type="radio" name="player-choice" id="player-choice-2" value="O" />
+<label for="player-choice-2">O</label>
+</fieldset>
+<button id="reset" class="btn btn-primary">Reset</button>
+</form>
+</div>
+<div class="row" id="grid-section">
+<ul id="grid"></ul>
+</div>
+<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+<script id="rendered-js">
+var grid = document.getElementById('grid');
+var msg = document.querySelector('.message');
+var chooser = document.querySelector('form');
+var mark;
+var cells;
+
+// add click listener to radio buttons
+function setPlayer() {
+  mark = this.value;
+  msg.textContent = mark + ', click on a square to make your move!';
+  chooser.classList.add('game-on');
+  this.checked = false;
+  buildGrid();
+}
+
+// add click listener to each cell
+function playerMove() {
+  if (this.textContent == '') {
+    this.textContent = mark;
+    checkRow();
+    switchMark();
+    computerMove();
+  }
+}
+
+// let the computer make the next move
+function computerMove() {
+  var emptyCells = [];
+  var random;
+
+  /*  for (var i = 0; i < cells.length; i++) {
+                  if (cells[i].textContent == '') {
+                    emptyCells.push(cells[i]);
+                  }
+                }*/
+
+  cells.forEach(function (cell) {
+    if (cell.textContent == '') {
+      emptyCells.push(cell);
+    }
+  });
+
+  // computer marks a random EMPTY cell
+  random = Math.ceil(Math.random() * emptyCells.length) - 1;
+  emptyCells[random].textContent = mark;
+  checkRow();
+  switchMark();
+}
+
+// switch player mark
+function switchMark() {
+  if (mark == 'X') {
+    mark = 'O';
+  } else {
+    mark = 'X';
+  }
+}
+
+// determine a winner
+function winner(a, b, c) {
+  if (a.textContent == mark && b.textContent == mark && c.textContent == mark) {
+    msg.textContent = mark + ' is the winner!';
+    a.classList.add('winner');
+    b.classList.add('winner');
+    c.classList.add('winner');
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// check cell combinations 
+function checkRow() {
+  winner(document.getElementById('c1'), document.getElementById('c2'), document.getElementById('c3'));
+  winner(document.getElementById('c4'), document.getElementById('c5'), document.getElementById('c6'));
+  winner(document.getElementById('c7'), document.getElementById('c8'), document.getElementById('c9'));
+  winner(document.getElementById('c1'), document.getElementById('c4'), document.getElementById('c7'));
+  winner(document.getElementById('c2'), document.getElementById('c5'), document.getElementById('c8'));
+  winner(document.getElementById('c3'), document.getElementById('c6'), document.getElementById('c9'));
+  winner(document.getElementById('c1'), document.getElementById('c5'), document.getElementById('c9'));
+  winner(document.getElementById('c3'), document.getElementById('c5'), document.getElementById('c7'));
+}
+
+// clear the grid
+function resetGrid() {
+  mark = 'X';
+  /* for (var i = 0; i < cells.length; i++) {
+                 cells[i].textContent = '';
+                 cells[i].classList.remove('winner');
+               }*/
+  cells.forEach(function (cell) {
+    cell.textContent = '';
+    cell.classList.remove('winner');
+  });
+  msg.textContent = 'Choose your player:';
+  chooser.classList.remove('game-on');
+  grid.innerHTML = '';
+}
+
+// build the grid
+function buildGrid() {
+  for (var i = 1; i <= 9; i++) {if (window.CP.shouldStopExecution(0)) break;
+    var cell = document.createElement('li');
+    cell.id = 'c' + i;
+    cell.addEventListener('click', playerMove, false);
+    grid.appendChild(cell);
+  }
+  /* cells = document.querySelectorAll('li'); //Returns a NodeList, not an Array
+    See https://css-tricks.com/snippets/javascript/loop-queryselectorall-matches */window.CP.exitedLoop(0);
+  cells = Array.prototype.slice.call(grid.getElementsByTagName('li'));
+}
+
+var players = Array.prototype.slice.call(document.querySelectorAll('input[name=player-choice]'));
+players.forEach(function (choice) {
+  choice.addEventListener('click', setPlayer, false);
+});
+
+var resetButton = chooser.querySelector('button');
+resetButton.addEventListener('click', function (e) {
+  e.preventDefault();
+  resetGrid();
+});
+//# sourceURL=pen.js
+    </script>
+</body>
+</html>
