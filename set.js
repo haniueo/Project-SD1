@@ -1,3 +1,5 @@
+<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+<script id="rendered-js">
 var grid = document.getElementById('grid');
 var msg = document.querySelector('.message');
 var chooser = document.querySelector('form');
@@ -28,18 +30,18 @@ function computerMove() {
   var emptyCells = [];
   var random;
 
-/*  for (var i = 0; i < cells.length; i++) {
-    if (cells[i].textContent == '') {
-      emptyCells.push(cells[i]);
-    }
-  }*/
-  
-  cells.forEach(function(cell){
+  /*  for (var i = 0; i < cells.length; i++) {
+                  if (cells[i].textContent == '') {
+                    emptyCells.push(cells[i]);
+                  }
+                }*/
+
+  cells.forEach(function (cell) {
     if (cell.textContent == '') {
       emptyCells.push(cell);
     }
   });
-  
+
   // computer marks a random EMPTY cell
   random = Math.ceil(Math.random() * emptyCells.length) - 1;
   emptyCells[random].textContent = mark;
@@ -84,11 +86,11 @@ function checkRow() {
 // clear the grid
 function resetGrid() {
   mark = 'X';
- /* for (var i = 0; i < cells.length; i++) {
-    cells[i].textContent = '';
-    cells[i].classList.remove('winner');
-  }*/
-  cells.forEach(function(cell){
+  /* for (var i = 0; i < cells.length; i++) {
+                 cells[i].textContent = '';
+                 cells[i].classList.remove('winner');
+               }*/
+  cells.forEach(function (cell) {
     cell.textContent = '';
     cell.classList.remove('winner');
   });
@@ -99,24 +101,26 @@ function resetGrid() {
 
 // build the grid
 function buildGrid() {
-  for (var i = 1; i <= 9; i++) {
+  for (var i = 1; i <= 9; i++) {if (window.CP.shouldStopExecution(0)) break;
     var cell = document.createElement('li');
     cell.id = 'c' + i;
     cell.addEventListener('click', playerMove, false);
     grid.appendChild(cell);
   }
   /* cells = document.querySelectorAll('li'); //Returns a NodeList, not an Array
-  See https://css-tricks.com/snippets/javascript/loop-queryselectorall-matches */
+    See https://css-tricks.com/snippets/javascript/loop-queryselectorall-matches */window.CP.exitedLoop(0);
   cells = Array.prototype.slice.call(grid.getElementsByTagName('li'));
 }
 
 var players = Array.prototype.slice.call(document.querySelectorAll('input[name=player-choice]'));
-players.forEach(function(choice){
+players.forEach(function (choice) {
   choice.addEventListener('click', setPlayer, false);
 });
 
 var resetButton = chooser.querySelector('button');
-resetButton.addEventListener('click', function(e) {
+resetButton.addEventListener('click', function (e) {
   e.preventDefault();
   resetGrid();
 });
+//# sourceURL=pen.js
+    
